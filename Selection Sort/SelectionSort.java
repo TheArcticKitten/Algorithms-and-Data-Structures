@@ -1,36 +1,38 @@
 import java.io.*;
 import java.util.*;
-public class BubbleSort
+public class SelectionSort
 {
 	public static void main(String[] sArgs)throws IOException
 	{
-		int size = 10000;
+		int size = 1000;
 		int[] data = new int[size]; Random oRan = new Random();
 		for(int i = 0; i < data.length;i++)data[i] = oRan.nextInt(100); 
 		System.out.println("Original :" + Arrays.toString(data));
 		long start = System.currentTimeMillis();
-		int[] sorted = bubbleSort(data);
+		int[] sorted = selectionSort(data);
 		long end = System.currentTimeMillis();
 		System.out.println("Data Sorted in " + (end - start) + " milliseconds :" + Arrays.toString(sorted));
 	}
 
-	public static int[] bubbleSort(int[] nums)
+	public static int[] selectionSort(int[] nums)
 	{
-		boolean swapped = true;
-		while(swapped)
+
+		for(int i = 0; i < nums.length; i++)
 		{
-			swapped = false;
-			for(int i = nums.length-1; i > 0; i--)
+			int min = Integer.MAX_VALUE;
+			int indMin = -1;
+			for(int j = i; j < nums.length; j++)
 			{
-				if(nums[i] < nums[i-1])//if out of order swap
+				if(nums[j] < min)
 				{
-					int temp = nums[i];
-					nums[i] = nums[i-1];
-					nums[i-1] = temp;
-					swapped = true;
+					indMin = j;
+					min = nums[j];
 				}
-				//System.out.println(Arrays.toString(nums));
 			}
+
+			int temp = nums[i];
+			nums[i] = nums[indMin];
+			nums[indMin] = temp;
 		}
 
 		return nums;
