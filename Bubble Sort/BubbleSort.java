@@ -6,7 +6,7 @@ public class BubbleSort
 	{
 		int size = 10000;
 		int[] data = new int[size]; Random oRan = new Random();
-		for(int i = 0; i < data.length;i++)data[i] = oRan.nextInt(100); 
+		for(int i = 0; i < data.length;i++)data[i] = oRan.nextInt(size); 
 		System.out.println("Original :" + Arrays.toString(data));
 		long start = System.currentTimeMillis();
 		int[] sorted = bubbleSort(data);

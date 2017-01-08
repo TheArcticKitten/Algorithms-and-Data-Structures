@@ -1,36 +1,34 @@
 import java.io.*;
 import java.util.*;
-public class SelectionSort
+public class InsertionSort
 {
 	public static void main(String[] sArgs)throws IOException
 	{
-		int size = 1000;
+		int size = 10;
 		int[] data = new int[size]; Random oRan = new Random();
-		for(int i = 0; i < data.length;i++)data[i] = oRan.nextInt(100); 
+		for(int i = 0; i < data.length;i++)data[i] = oRan.nextInt(size); 
 		System.out.println("Original :" + Arrays.toString(data));
 		long start = System.currentTimeMillis();
-		int[] sorted = selectionSort(data);
+		int[] sorted = insertionSort(data);
 		long end = System.currentTimeMillis();
 		System.out.println("Data Sorted in " + (end - start) + " milliseconds :" + Arrays.toString(sorted));
 	}
 
-	public static int[] selectionSort(int[] nums)
+	public static int[] insertionSort(int[] nums)
 	{
-		for(int i = 0; i < nums.length; i++)
+		for(int i = 1; i < nums.length; i++)
 		{
-			int min = Integer.MAX_VALUE;
-			int indMin = -1;
-			for(int j = i; j < nums.length; j++)
+			out:
+			for(int j = i; j > 0;j--)
 			{
-				if(nums[j] < min)
+				if(nums[j] < nums[j-1])//if less than one next to it
 				{
-					indMin = j;
-					min = nums[j];
+					int temp = nums[j];
+					nums[j] = nums[j-1];
+					nums[j-1] = temp;
 				}
+				else break out;
 			}
-			int temp = nums[i];
-			nums[i] = nums[indMin];
-			nums[indMin] = temp;
 		}
 
 		return nums;
